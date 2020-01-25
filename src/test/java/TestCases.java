@@ -42,9 +42,9 @@ public class TestCases {
         System.out.println("-------------------------------------------------------");
         rs= statement.executeQuery("SELECT first_name, gender, fee FROM students  limit 10;");
         while (rs.next()){
-            String name =rs.getString(1);
-            String gender =rs.getString(2);
-            String fee =rs.getString(3);
+            String name =rs.getString("first_name");
+            String gender =rs.getString("gender");
+            Double fee =rs.getDouble("fee");
             System.out.println(name + " " + gender + " " + fee);
         }
     }
@@ -54,41 +54,36 @@ public class TestCases {
         ResultSet rs = statement.executeQuery( "SELECT first_name, gender, fee FROM students limit 10;" );
         String name;
         String gender;
-        String fee;
+        Double fee;
 
         while(rs.next()) {
-            name = rs.getString( 1 );
-            gender = rs.getString( 2 );
-            fee = rs.getString( 3 );
-            System.out.println( name + " " + gender + " " + fee );
+            getValuesFromCurrentRow( rs );
         }
 
         System.out.println("-------------------------------------------------------");
         rs.absolute( 5 ); // gettin data from 5th row
-        name = rs.getString( 1 );
-        gender = rs.getString( 2 );
-        fee = rs.getString( 3 );
-        System.out.println( name + " " + gender + " " + fee );
+        getValuesFromCurrentRow( rs );
 
         System.out.println("-------------------------------------------------------");
         rs.relative( -2 ); // gettin data from 3rd row
-        name = rs.getString( 1 );
-        gender = rs.getString( 2 );
-        fee = rs.getString( 3 );
-        System.out.println( name + " " + gender + " " + fee );
+        getValuesFromCurrentRow( rs );
 
         System.out.println("-------------------------------------------------------");
         rs.last(); // gettin data from last row
-        name = rs.getString( 1 );
-        gender = rs.getString( 2 );
-        fee = rs.getString( 3 );
-        System.out.println( name + " " + gender + " " + fee );
+        getValuesFromCurrentRow( rs );
 
         System.out.println("-------------------------------------------------------");
         rs.previous(); // gettin data from 9th row
-        name = rs.getString( 1 );
-        gender = rs.getString( 2 );
-        fee = rs.getString( 3 );
+        getValuesFromCurrentRow( rs );
+    }
+
+    private void getValuesFromCurrentRow(ResultSet rs) throws SQLException {
+        String name = rs.getString( 1 );
+        String gender = rs.getString( 2 );
+        if(rs.wasNull()){
+            gender = "<Gender not found!>";
+        }
+        Double fee = rs.getDouble( 3 );
         System.out.println( name + " " + gender + " " + fee );
     }
 }
