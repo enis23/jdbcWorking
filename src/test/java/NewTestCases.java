@@ -91,4 +91,26 @@ public class NewTestCases {
         }
     }
 
+    @Test
+    public void testTask6() throws SQLException {
+        ResultSet rs = statement.executeQuery( "select fee from students " +
+                "where gender = 'male' and country = 'United States' " +
+                "limit 5" );
+        while(rs.next()) {
+            Double fee = rs.getDouble( 1 );
+            System.out.println("Fee: " + fee);
+        }
+
+        statement.executeUpdate( "update students set fee = fee + 10 where gender = 'male' and country = 'United States'" );
+        System.out.println("--------------------------------------------");
+
+        rs = statement.executeQuery( "select fee from students " +
+                "where gender = 'male' and country = 'United States' " +
+                "limit 5" );
+        while(rs.next()) {
+            Double fee = rs.getDouble( 1 );
+            System.out.println("Fee: " + fee);
+        }
+    }
+
 }
