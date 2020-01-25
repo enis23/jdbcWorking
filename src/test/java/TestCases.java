@@ -35,7 +35,7 @@ public class TestCases {
         }
 
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE students SET fee = (fee * ?) WHERE gender = ?;");
-        preparedStatement.setDouble( 1, 1.15);
+        preparedStatement.setDouble( 1, 0.95);
         preparedStatement.setString(2, "Male");
         preparedStatement.executeUpdate();
 
