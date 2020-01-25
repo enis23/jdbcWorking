@@ -48,4 +48,47 @@ public class TestCases {
             System.out.println(name + " " + gender + " " + fee);
         }
     }
+
+    @Test
+    public void  test2() throws SQLException {
+        ResultSet rs = statement.executeQuery( "SELECT first_name, gender, fee FROM students limit 10;" );
+        String name;
+        String gender;
+        String fee;
+
+        while(rs.next()) {
+            name = rs.getString( 1 );
+            gender = rs.getString( 2 );
+            fee = rs.getString( 3 );
+            System.out.println( name + " " + gender + " " + fee );
+        }
+
+        System.out.println("-------------------------------------------------------");
+        rs.absolute( 5 ); // gettin data from 5th row
+        name = rs.getString( 1 );
+        gender = rs.getString( 2 );
+        fee = rs.getString( 3 );
+        System.out.println( name + " " + gender + " " + fee );
+
+        System.out.println("-------------------------------------------------------");
+        rs.relative( -2 ); // gettin data from 3rd row
+        name = rs.getString( 1 );
+        gender = rs.getString( 2 );
+        fee = rs.getString( 3 );
+        System.out.println( name + " " + gender + " " + fee );
+
+        System.out.println("-------------------------------------------------------");
+        rs.last(); // gettin data from last row
+        name = rs.getString( 1 );
+        gender = rs.getString( 2 );
+        fee = rs.getString( 3 );
+        System.out.println( name + " " + gender + " " + fee );
+
+        System.out.println("-------------------------------------------------------");
+        rs.previous(); // gettin data from 9th row
+        name = rs.getString( 1 );
+        gender = rs.getString( 2 );
+        fee = rs.getString( 3 );
+        System.out.println( name + " " + gender + " " + fee );
+    }
 }
