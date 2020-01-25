@@ -24,13 +24,22 @@ public class TestCases {
     }
     @Test
     public void  test() throws SQLException {
-        ResultSet rs= statement.executeQuery("SELECT first_name, last_name, email FROM students;");
+        ResultSet rs= statement.executeQuery("SELECT first_name, gender, fee FROM students limit 10;");
         while (rs.next()){
             String name =rs.getString(1);
-            String lastName =rs.getString(2);
-            String email =rs.getString(3);
-            System.out.println(name + " " + lastName + " " + email);
+            String gender =rs.getString(2);
+            String fee =rs.getString(3);
+            System.out.println(name + " " + gender + " " + fee);
         }
 
+        statement.executeUpdate("UPDATE students SET fee = (fee * .9) WHERE gender = 'Female';");
+
+        rs= statement.executeQuery("SELECT first_name, gender, fee FROM students  limit 10;");
+        while (rs.next()){
+            String name =rs.getString(1);
+            String gender =rs.getString(2);
+            String fee =rs.getString(3);
+            System.out.println(name + " " + gender + " " + fee);
+        }
     }
 }
