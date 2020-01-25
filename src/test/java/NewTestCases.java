@@ -35,4 +35,16 @@ public class NewTestCases {
             System.out.println( name + ", "+country+ ", "+city+ ", "+postalCode);
         }
     }
+    @Test
+    public void  testNew() throws SQLException {
+        ResultSet resultSet = statement.executeQuery("select" +
+                " * " +
+                "from students order by fee DESC limit 20");
+        while(resultSet.next()) {
+            String email = resultSet.getString( "email" );
+            Double fee = resultSet.getDouble( "fee" );
+            String currency = resultSet.getString( "currency" );
+            System.out.println("email: " + email+", fee:" + fee + " " + currency );
+        }
+        }
 }
