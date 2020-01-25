@@ -74,6 +74,21 @@ public class NewTestCases {
                 + " " +  rs.getString( "last_name" )
                 + ", fee:" + rs.getString( "fee" )
                 + " " + rs.getString( "currency" ) );
-
     }
+
+    @Test
+    public void testTask5() throws SQLException {
+        ResultSet rs = statement.executeQuery( "select " +
+                "avg(fee), currency, country " +
+                " from students " +
+                "group by currency, country;"
+        );
+        while(rs.next()) {
+            Double avgFee = rs.getDouble( 1 );
+            String currency = rs.getString( 2 );
+            String country = rs.getString( 3 );
+            System.out.println("country: " + country +", currency: " + currency + " avg: " + (avgFee * 1.17) );
+        }
+    }
+
 }
