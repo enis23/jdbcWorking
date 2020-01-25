@@ -48,4 +48,32 @@ public class NewTestCases {
             System.out.println( "email: " + email + ", fee:" + fee + " " + currency );
         }
     }
+
+    @Test
+    public void testTask4() throws SQLException {
+        ResultSet rs = statement.executeQuery( "select" +
+                " * " +
+                "from students order by fee DESC limit 20" );
+        rs.absolute( 5 );
+        System.out.println( "fullname: " + rs.getString( "first_name" )
+                + " " +  rs.getString( "last_name" )
+                + ", fee:" + rs.getString( "fee" )
+                + " " + rs.getString( "currency" ) );
+        rs.relative( 3 );
+        System.out.println( "fullname: " + rs.getString( "first_name" )
+                + " " +  rs.getString( "last_name" )
+                + ", fee:" + rs.getString( "fee" )
+                + " " + rs.getString( "currency" ) );
+        rs.last();
+        System.out.println( "fullname: " + rs.getString( "first_name" )
+                + " " +  rs.getString( "last_name" )
+                + ", fee:" + rs.getString( "fee" )
+                + " " + rs.getString( "currency" ) );
+        rs.first();
+        System.out.println( "fullname: " + rs.getString( "first_name" )
+                + " " +  rs.getString( "last_name" )
+                + ", fee:" + rs.getString( "fee" )
+                + " " + rs.getString( "currency" ) );
+
+    }
 }
