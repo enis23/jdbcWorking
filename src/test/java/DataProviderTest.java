@@ -25,28 +25,40 @@ public class DataProviderTest {
 
     @DataProvider(name = "students")
     public Object[][] studentsData() throws SQLException {
+        // creating query from statement
         ResultSet resultSet = statement.executeQuery( "select " +
                 "* " +
                 "from students" );
+        // to set cursor to the last element in order for to get the number of rows
         resultSet.last();
+        // get the number of rows
         int numberOfRow = resultSet.getRow();
+
+        // create two dimensional array based on number rows and six columns
         Object[][] resultData = new Object[numberOfRow][6];
+
+        // point the cursor to the row before first
         resultSet.beforeFirst();
-        int i = 0;
-        while(resultSet.next()) {
+        // initialize row to the first row (0 index based)
+        int row = 0;
+        // while we have next row
+        while(resultSet.next()) { // this advances the cursor and return true or false whether there is next row or not
+            // read columns from the row
             String first_name = resultSet.getString( "first_name" );
             String last_name = resultSet.getString( "last_name" );
             String email = resultSet.getString( "email" );
             String gender = resultSet.getString( "gender" );
             String country = resultSet.getString( "country" );
             Double fee = resultSet.getDouble( "fee" );
-            resultData[i][0] = first_name;
-            resultData[i][1] = last_name;
-            resultData[i][2] = email;
-            resultData[i][3] = gender;
-            resultData[i][4] = country;
-            resultData[i][5] = fee;
-            i++;
+            // assign column values to fields of my two dimensional array
+            resultData[row][0] = first_name;
+            resultData[row][1] = last_name;
+            resultData[row][2] = email;
+            resultData[row][3] = gender;
+            resultData[row][4] = country;
+            resultData[row][5] = fee;
+            // advance row
+            row++;
         }
 
         return resultData;
